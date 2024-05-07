@@ -1,6 +1,7 @@
 import pytest
 
 from reworkd_platform.schemas.agent import ModelSettings
+import math
 
 
 @pytest.mark.parametrize(
@@ -56,6 +57,6 @@ def test_model_settings_invalid(settings):
 def test_model_settings_default():
     settings = ModelSettings(**{})
     assert settings.model == "gpt-3.5-turbo"
-    assert settings.temperature == 0.9
+    assert math.isclose(settings.temperature, 0.9, rel_tol=1e-09, abs_tol=0.0)
     assert settings.max_tokens == 500
     assert settings.language == "English"
